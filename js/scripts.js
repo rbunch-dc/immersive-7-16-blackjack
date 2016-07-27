@@ -148,12 +148,20 @@ function shuffleDeck(){
 function calculateTotal(hand, whosTurn){
 	// console.log(hand);
 	// console.log(whosTurn);
+	var hasAce = false; //init Ace as false.
 	var total = 0;
 	var cardValue = 0;
 	for(var i = 0; i<hand.length; i++){
-		cardValue = Number(hand[i].slice(0,-1))
-		if(cardValue > 10){
+		cardValue = Number(hand[i].slice(0,-1));
+		if((cardValue == 1) && ((total + 11) <= 21)){
+			//THis card is an ace!! Check if 11 will fit. If not, it's a 1
+			cardValue = 11;
+			hasAce = true;
+		}else if(cardValue > 10){
 			cardValue = 10;
+		}else if ((cardValue + total > 21) && (hasAce)){
+			total = total - 10;
+			hasAce = false;
 		}
 		total += cardValue;
 	}
