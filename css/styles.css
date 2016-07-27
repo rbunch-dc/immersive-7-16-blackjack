@@ -31,3 +31,11 @@
 	color: white;
 	border-radius: 3px;
 }
+
+.card{
+	padding: 0px;
+}
+
+img{
+	max-width: 100%;
+}

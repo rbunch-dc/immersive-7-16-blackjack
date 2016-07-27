@@ -1,3 +1,16 @@
+// Set messages after game over
+// The table/game looks like Rob made it. Change this.
+// What about those stupid 11, 12, 13?
+// What about Aces?
+// The player can hit forever?
+// There is no win counter/bet system
+// There is no "deck" to draw from
+// The cards aren't red or black like they should/could be
+// The cards are lame. Find images.
+// There is no delay on showing the cards... it's instant. 
+// You can see the dealers 2nd card on deal. That's unfair (to the house).
+
+
 // 1. When the user clicks deal, deal.
 var theDeck =[];
 var playersHand = [];
@@ -67,6 +80,29 @@ $(document).ready(function(){
 
 function checkWin(){
 	alert("Game over");
+	// Get player total
+	var playersTotal = calculateTotal(playersHand, 'player');	
+	// Get dealer total
+	var dealerTotal = calculateTotal(dealersHand, 'dealer');
+
+	if(playersTotal > 21){
+		//player has busted.
+		// Set a message somewhere that says this.
+	}else if(dealerTotal > 21){
+		// Dealer has busted. 
+		// Set a message somewhere that says this
+	}else{
+		// Neither player has more than 21.
+		if(playersTotal > dealerTotal){
+			// Player won. Say this somewhere
+		}else if(dealerTotal > playersTotal){
+			//Dealer won. Say this somewhere
+		}else{
+			// Push. (tie) Say this somwhere.
+		}
+	}
+
+
 }
 
 function placeCard(who, where, cardToPlace){
@@ -74,7 +110,7 @@ function placeCard(who, where, cardToPlace){
 
 	// Write logic to fix the 11, 12, 13 issue
 
-	$(classSelector).html(cardToPlace);
+	$(classSelector).html('<img src="cards/'+cardToPlace+'.png">');
 }
 
 function createDeck(){
