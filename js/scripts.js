@@ -55,19 +55,22 @@ $(document).ready(function(){
 	});
 
 	$('.hit-button').click(function(){
-		
-		var slotForNewCard = '';
-		if(playersHand.length == 2){slotForNewCard = "three";}
-		else if(playersHand.length == 3){slotForNewCard = "four";}
-		else if(playersHand.length == 4){slotForNewCard = "five";}
-		else if(playersHand.length == 5){slotForNewCard = "six";}
+		var playerTotal = calculateTotal(playersHand, 'player');
+		if(playerTotal <= 21){
+			
+			var slotForNewCard = '';
+			if(playersHand.length == 2){slotForNewCard = "three";}
+			else if(playersHand.length == 3){slotForNewCard = "four";}
+			else if(playersHand.length == 4){slotForNewCard = "five";}
+			else if(playersHand.length == 5){slotForNewCard = "six";}
 
-		setTimeout(function(){ 
-			placeCard('player', slotForNewCard, theDeck[topOfTheDeck]);
-			playersHand.push(theDeck[topOfTheDeck]);
-			calculateTotal(playersHand, 'player');
-			topOfTheDeck++;
-		}, 500);		
+			setTimeout(function(){ 
+				placeCard('player', slotForNewCard, theDeck[topOfTheDeck]);
+				playersHand.push(theDeck[topOfTheDeck]);
+				calculateTotal(playersHand, 'player');
+				topOfTheDeck++;
+			}, 500);		
+		}
 	});
 
 	$('.stand-button').click(function(){
@@ -115,8 +118,20 @@ function checkWin(){
 			// Push. (tie) Say this somwhere.
 		}
 	}
+	$('.message').html('<button class="reset-button">Reset Game</button>');
+	$('.reset-button').click(function(){
+		reset();
+	})
+}
 
-
+function reset(){
+	theDeck =[];
+	playersHand = [];
+	dealersHand = [];
+	topOfTheDeck = 4;
+	$('.card').html('');
+	calculateTotal(playersHand, 'player');	
+	calculateTotal(dealersHand, 'dealer');
 }
 
 function placeCard(who, where, cardToPlace){

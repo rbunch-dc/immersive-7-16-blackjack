@@ -39,3 +39,11 @@
 img{
 	max-width: 100%;
 }
+
+.message{
+	text-align: center;
+	font-size: 24px;
+	color: white;
+	background-color: red;
+	margin-top: 10px;
+}
